@@ -8,7 +8,7 @@ The root element of this file should be a Module element.
 
 ## Module
 
-|Name|Requirement|Description|
+|Attributes|Requirement|Description|
 |-|-|-|
 |id|Required|A unique identifier across all installed mods.|
 |version|_Optional_|A Semver Number describing the version of the mod.|
@@ -23,14 +23,14 @@ Module can contain the following as children:
 
 ## ModuleDependency
 
-|Name|Requirement|Description|
+|Attributes|Requirement|Description|
 |-|-|-|
 |id|Required|The ID declared in the `module.manifest.xml` of the script module you wish to add as a dependency|
 |version|_Optional_|A valid semver to match against|
 
 ## SteamWorkshopDependency
 
-|Name|Requirement|Description|
+|Attributes|Requirement|Description|
 |-|-|-|
 |workshopId|Required|The ID declared in the mod.manifest.xml of the script module you wish to add as a dependency|
 |path|_Optional_|The path, relative to `Data/Scripts` in the mod's directory for which assembly we should load|
@@ -45,13 +45,13 @@ You can define multiple SteamWorkshopDependency elements with the same workshopI
 
 ## PluginDependency
 
-|Name|Requirement|Description|
+|Attributes|Requirement|Description|
 |-|-|-|
 |id|Required|The plugin id (typically a github id), such as `lukekaalim/scriptingextensionplus`|
 
 ## InGameScriptReference
 
-|Name|Requirement|Description|
+|Attributes|Requirement|Description|
 |-|-|-|
 |whitelist|_optional_|The plugin id (typically a github id), such as `lukekaalim/scriptingextensionplus`|
 
@@ -59,7 +59,7 @@ This element allows the assembly the be referenced from inside an ingame program
 
 ## InGameScriptNamespace
 
-|Name|Requirement|Description|
+|Attributes|Requirement|Description|
 |-|-|-|
 |scope|_Optional_||
 |alias|_Optional_||
