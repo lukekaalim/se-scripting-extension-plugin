@@ -1,5 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
-<Import Project="local/props.targets"/>
+  <Import Project="local/props.targets" />
   <PropertyGroup>
     <PlatformTarget>x64</PlatformTarget>
     <TargetFramework>net48</TargetFramework>
@@ -11,11 +11,11 @@
     <Reference Include="$(SE)/Sandbox*.dll" Private="False" />
     <Reference Include="$(SE)/0Harmony.dll" Private="False" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Semver" Version="2.3.0" />
+  </ItemGroup>
   <Target Name="Copy Dynamic Plugin" AfterTargets="Build">
-    <Copy
-      SourceFiles="$(OutputPath)/ScriptManagerExtended.dll"
-      DestinationFolder="$(SE_App_Data)/DynamicPlugins"
-    />
-    <Message Text="Copied DLL to /DynamicPlugins" Importance="High" />
+    <Copy SourceFiles="$(OutputPath)/Semver.dll" DestinationFolder="$(SE)" />
+    <Copy SourceFiles="$(OutputPath)/ScriptManagerExtended.dll" DestinationFolder="$(SE_App_Data)/DynamicPlugins" />
   </Target>
 </Project>
