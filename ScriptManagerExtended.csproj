@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+<Import Project="local/props.targets"/>
+  <PropertyGroup>
+    <PlatformTarget>x64</PlatformTarget>
+    <TargetFramework>net48</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="$(SE)/VRage*.dll" Private="False" Exclude="$(SE)/VRage.Native.dll" />
+    <Reference Include="$(SE)/System*.dll" Private="False" />
+    <Reference Include="$(SE)/Microsoft*.dll" Private="False" />
+    <Reference Include="$(SE)/Sandbox*.dll" Private="False" />
+    <Reference Include="$(SE)/0Harmony.dll" Private="False" />
+  </ItemGroup>
+  <Target Name="Copy Dynamic Plugin" AfterTargets="Build">
+    <Copy
+      SourceFiles="$(OutputPath)/ScriptManagerExtended.dll"
+      DestinationFolder="$(SE_App_Data)/DynamicPlugins"
+    />
+    <Message Text="Copied DLL to /DynamicPlugins" Importance="High" />
+  </Target>
+</Project>
