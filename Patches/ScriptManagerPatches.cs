@@ -11,7 +11,7 @@ using Sandbox;
 using Sandbox.Game.Screens;
 using Sandbox.Engine.Utils;
 using Sandbox.Game.World;
-
+/*
 namespace ScriptingExtension.Patches {
   public static  class ScriptManagerPatches
   {
@@ -73,3 +73,4 @@ namespace ScriptingExtension.Patches {
     }
   }
 }
+*/

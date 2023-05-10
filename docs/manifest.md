@@ -14,7 +14,7 @@ The root element of this file should be a Module element.
 |Attributes|Requirement|Description|
 |-|-|-|
 |id|Required|A unique identifier across all installed mods.|
-|version|_Optional_|A Semver Number describing the version of the mod.|
+|version|_Optional_|A Semver Number describing the version of the mod. Defaults to "0.0.0"|
 |priority|_Optional_|Defaults to 1. Used to decide when multiple otherwise equally valid modules meet a dependency|
 
 Module can contain the following as children:

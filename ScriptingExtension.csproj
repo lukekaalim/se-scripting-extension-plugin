@@ -16,6 +16,6 @@
   </ItemGroup>
   <Target Name="Copy Dynamic Plugin" AfterTargets="Build">
     <Copy SourceFiles="$(OutputPath)/Semver.dll" DestinationFolder="$(SE)" />
-    <Copy SourceFiles="$(OutputPath)/ScriptManagerExtended.dll" DestinationFolder="$(SE_App_Data)/DynamicPlugins" />
+    <Copy SourceFiles="$(OutputPath)/ScriptingExtension.dll" DestinationFolder="$(SE_App_Data)/DynamicPlugins" />
   </Target>
 </Project>
