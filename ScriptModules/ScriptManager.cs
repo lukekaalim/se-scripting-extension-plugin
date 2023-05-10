@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using VRage.Game;
 using VRage.Utils;
 
-namespace ScriptManagerExtended.ScriptModules {
+namespace ScriptingExtension.ScriptModules {
   public class ScriptManager
   {
     public DependencyResolver resolver;

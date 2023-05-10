@@ -8,7 +8,7 @@ using System.IO;
 using System.Text;
 using Semver;
 
-namespace ScriptManagerExtended.ScriptModules {
+namespace ScriptingExtension.ScriptModules {
   public class DependencyResolver
   {
     public Compiler compiler;

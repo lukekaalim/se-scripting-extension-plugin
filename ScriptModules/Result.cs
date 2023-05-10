@@ -7,7 +7,7 @@ using VRage.Game;
 using System.IO;
 using System.Text;
 
-namespace ScriptManagerExtended.ScriptModules {
+namespace ScriptingExtension.ScriptModules {
   public class ScriptModuleResult {
     public ScriptModule module;
   }

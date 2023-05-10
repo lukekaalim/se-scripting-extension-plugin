@@ -7,7 +7,6 @@ expanding InGameScripting and Mods.
 
 - **Script Modules**. Reference other mods and their API's directly in your code.
   - IngameScript Namespaces. Add your mods's types for use with InGameScripts.
-  - F# Compiler. Write your code in FSharp for some reason.
 
 See more details in the [features document](docs/features.md)
 
@@ -25,9 +24,10 @@ in that directory, conforming to the following structure:
   <ModuleDependency id="lkaalim.mods.myothermod" version="2.0.0" />
   <ModuleDependency id="lkaalim.mods.anotherMod" />
   <SteamWorkshopDependency workshopId="542345" />
-  <PluginDependency id="lkaalim.mods.myplugin"/>
+  <PluginDependency id="lkaalim/myplugin"/>
 
-  <InGameScriptNamespace scope="lkaalim.mod.mymodname.ingame" alias="mymodname" />
+  <InGameScriptNamespace scope="lkaalim.mod.mymodname.ingame" />
+  <Compatability workshopDefault="True">
 </Mod>
 ```
 

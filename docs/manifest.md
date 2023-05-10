@@ -1,5 +1,8 @@
 # module.manifest.xml
 
+|Schema Version|`0.2.0`|
+|-|-|
+
 This document contains a brief description of all the valid elements a `module.manifest.xml` can contain. This file should be placed inside a subdirectory inside `Data/ScriptModules` in your mod, such as `Data/ScriptModules/MyCoolModule/module.manifest.xml`
 
 The name of the subdirectory is not significant, it just deliminates different modules.
@@ -12,21 +15,35 @@ The root element of this file should be a Module element.
 |-|-|-|
 |id|Required|A unique identifier across all installed mods.|
 |version|_Optional_|A Semver Number describing the version of the mod.|
-|language|_Optional_|One of "csharp" or "fsharp". Defaults to csharp.|
+|priority|_Optional_|Defaults to 1. Used to decide when multiple otherwise equally valid modules meet a dependency|
 
 Module can contain the following as children:
 
+ - Compatability
  - ModuleDependency
  - SteamWorkshopDependency
  - PluginDependency
  - InGameScriptReference
+
+## Compatability
+
+Compatability can contain the following as children:
+  - Workshop
+
+## Workshop
+|Attributes|Requirement|Description|
+|-|-|-|
+|path|_Optional_|Define the path this module represents if imported as a workshop dependency|
+|workshopDefault|_Optional_|Does this module act as the root level workshop import, `"True"` or `"False"`|
+
+Multiple "Workshop" elements can be declared to satisfy multiple WorkshopDependencies with a single ScriptModule.
 
 ## ModuleDependency
 
 |Attributes|Requirement|Description|
 |-|-|-|
 |id|Required|The ID declared in the `module.manifest.xml` of the script module you wish to add as a dependency|
-|version|_Optional_|A valid semver to match against|
+|version|_Optional_|A valid semver range to match against|
 
 ## SteamWorkshopDependency
 
@@ -47,15 +64,7 @@ You can define multiple SteamWorkshopDependency elements with the same workshopI
 
 |Attributes|Requirement|Description|
 |-|-|-|
-|id|Required|The plugin id (typically a github id), such as `lukekaalim/scriptingextensionplus`|
-
-## InGameScriptReference
-
-|Attributes|Requirement|Description|
-|-|-|-|
-|whitelist|_optional_|The plugin id (typically a github id), such as `lukekaalim/scriptingextensionplus`|
-
-This element allows the assembly the be referenced from inside an ingame programming block.
+|id|Required|The plugin id (typically a github id), such as `lukekaalim/scriptingextension|
 
 ## InGameScriptNamespace
 
@@ -65,3 +74,6 @@ This element allows the assembly the be referenced from inside an ingame program
 |alias|_Optional_||
 
 Adds a reference to automatic imports occuring inside a script.
+
+One or more instances of this block adds this module as an assembly reference against all
+programmable blocks.

@@ -12,7 +12,7 @@ using Sandbox.Game.World;
 using System.Linq;
 using System.Reflection;
 
-namespace ScriptManagerExtended.ScriptModules {
+namespace ScriptingExtension.ScriptModules {
   public class Registry
   {
     public void RegisterAssemblies(Assembly[] assemblies) {

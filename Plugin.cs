@@ -14,7 +14,7 @@ using System.Linq;
 using HarmonyLib;
 using Microsoft.CodeAnalysis;
 
-namespace ScriptManagerExtended
+namespace ScriptingExtension
 {
   public class Main : IPlugin
   {

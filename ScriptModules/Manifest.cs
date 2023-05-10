@@ -2,7 +2,7 @@ using System.Xml;
 using System.Linq;
 using Semver;
 
-namespace ScriptManagerExtended.ScriptModules {
+namespace ScriptingExtension.ScriptModules {
   public class Manifest
   {
     public ModuleDeclaration module;
