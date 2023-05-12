@@ -39,13 +39,6 @@ namespace ScriptingExtension
       manager = new ScriptModules.ScriptManager()
       {
         registry = new ScriptModules.Registry(),
-        resolver = new ScriptModules.DependencyResolver()
-        {
-          compiler = new ScriptModules.Compiler()
-          {
-            StaticReferences = new List<MetadataReference>()
-          }
-        }
       };
       Patches.ScriptCompilerPatches.Patch(harmony);
       Patches.ScriptManagerPatches.Patch(harmony);
@@ -69,11 +62,20 @@ namespace ScriptingExtension
       FieldInfo metadataReferencesField = typeof(MyScriptCompiler)
           .GetField("m_metadataReferences", AccessTools.all);
 
-      manager.resolver.compiler.StaticReferences = metadataReferencesField
+      var staticReferences = metadataReferencesField
           .GetValue(MyScriptCompiler.Static) as List<MetadataReference>;
+
+      var resolver = new ScriptModules.DependencyResolver() {
+        compiler = new ScriptModules.Compiler() {
+          StaticReferences = staticReferences
+        },
+        scriptManager = MyScriptManager.Static,
+        session = MySession.Static,
+      };
+        
       MyLog.Default.WriteLine("Assigning static references:");
       MyLog.Default.IncreaseIndent();
-      foreach (var reference in manager.resolver.compiler.StaticReferences)
+      foreach (var reference in resolver.compiler.StaticReferences)
         MyLog.Default.WriteLine($"{reference.Display}");
       MyLog.Default.DecreaseIndent();
 
@@ -82,7 +84,13 @@ namespace ScriptingExtension
           .OfType<MyModContext>()
           .ToArray();
 
-      manager.LoadMods(mods);
+      MyLog.Default.WriteLine("Loading mods");
+      MyLog.Default.IncreaseIndent();
+      foreach (var mod in mods)
+        MyLog.Default.WriteLine($"{mod.ModName}");
+      MyLog.Default.DecreaseIndent();
+
+      manager.LoadMods(resolver, mods);
     }
 
     public static void LoadScriptModules()

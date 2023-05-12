@@ -9,6 +9,7 @@ using Microsoft.CodeAnalysis;
 using HarmonyLib;
 
 using VRage.Scripting;
+using VRage.Utils;
 
 namespace ScriptingExtension.Patches
 {
@@ -24,12 +25,16 @@ namespace ScriptingExtension.Patches
     }
 
     public static CSharpCompilation GetCompilationForAssemblyName(this MyScriptCompiler _, string assemblyName) {
-      return compilations.GetValueSafe(assemblyName);
+      return compilations[assemblyName];
     }
 
     public static void PostCreateCompilation(string assemblyFileName, ref CSharpCompilation __result)
     {
-      compilations.Add(assemblyFileName, __result);
+      MyLog.Default.WriteLine($"Saving compilation {__result} as {assemblyFileName}");
+      if (compilations.ContainsKey(assemblyFileName))
+        compilations[assemblyFileName] = __result;
+      else
+        compilations.Add(assemblyFileName, __result);
     }
   }
 }

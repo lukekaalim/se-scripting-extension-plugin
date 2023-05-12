@@ -49,9 +49,12 @@ namespace ScriptingExtension.Patches {
     }
 
     public static MetadataReference GetScriptReference(this MyScriptManager manager, MyModContext mod, string scriptPath) {
+      MyLog.Default.WriteLine($"Seaching for {mod?.ModName} {scriptPath}");
       var name = manager.GetModScriptAssemblyName(mod, scriptPath);
+      MyLog.Default.WriteLine($"Name is {name}");
       var compilation = MyScriptCompiler.Static.GetCompilationForAssemblyName(name);
-      return compilation.ToMetadataReference();
+      MyLog.Default.WriteLine($"Compilation is {compilation?.ToString()}");
+      return compilation?.ToMetadataReference();
     }
     public static Assembly GetScriptAssembly(this MyScriptManager manager, MyModContext mod, string scriptPath) {
       var id = MyStringId.GetOrCompute(manager.GetModScriptAssemblyName(mod, scriptPath));

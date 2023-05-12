@@ -31,12 +31,12 @@ namespace ScriptingExtension.ScriptModules {
         .SelectMany(module => module.manifest.steamWorkshopDependencies)
         .Distinct()
         .Select(workshopDependency => {
-          var mod = session.GetMod(workshopDependency.workshopId);
-          var context = mod?.GetModContext() as MyModContext;
+          var mod = session.Mods.Find(m => m.GetWorkshopId().Id == workshopDependency.workshopId.Id);
+          var context = mod.GetModContext() as MyModContext;
           var reference = scriptManager.GetScriptReference(context, workshopDependency.path);
           var assembly = scriptManager.GetScriptAssembly(context, workshopDependency.path);
 
-          if (reference == null || mod == null || context == null || assembly == null)
+          if (reference == null || context == null || assembly == null)
             return null;
 
           return new CompiledWorkshopDependency() {
@@ -89,26 +89,30 @@ namespace ScriptingExtension.ScriptModules {
           var moduleDependencies = moduleToCompile.module.manifest
             .moduleDependencies
             .Select(dep => resolvedModules
-              .FirstOrDefault(rm => IsDependencySatisfied(dep, rm.module.manifest.module)));
+              .FirstOrDefault(rm => IsDependencySatisfied(dep, rm.module.manifest.module)))
+            .ToArray();
           
           var steamDependencies = moduleToCompile.module.manifest
             .steamWorkshopDependencies
             .Select(dep => allWorkshopDependencies
               .FirstOrDefault(compiledDep =>
-                compiledDep.workshopId.Id == dep.workshopId.Id && compiledDep.path == dep.path));
+                compiledDep.workshopId.Id == dep.workshopId.Id && compiledDep.path == dep.path))
+            .ToArray();
           
           if (moduleDependencies.Any(d => d == null) || steamDependencies.Any(d => d == null))
             return moduleToCompile;
 
           var references = moduleDependencies
             .Select(md => md.reference)
-            .Concat(steamDependencies.Select(sd => sd.reference));
+            .Concat(steamDependencies.Select(sd => sd.reference))
+            .ToArray();
 
           return compiler.Compile(moduleToCompile.module, references);
       }
 
       var modules = unresolvedModules
-        .Select(ResolveScriptModule);
+        .Select(ResolveScriptModule)
+        .ToArray();
 
       var freshlyCompiledModules = modules
         .OfType<CompiledScriptModule>();

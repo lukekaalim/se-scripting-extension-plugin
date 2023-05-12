@@ -4,6 +4,7 @@ using System.Reflection;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using VRage.Game;
+using VRage.Utils;
 using System.IO;
 using System.Text;
 
@@ -15,7 +16,9 @@ namespace ScriptingExtension.ScriptModules {
     public ScriptModuleResult Compile(ScriptModule module, IEnumerable<MetadataReference> dependencies) {
       var trees = module.files.Select(file => file.Tree);
       var references = dependencies
-        .Concat(StaticReferences);
+        .Concat(StaticReferences)
+        .ToArray();
+      MyLog.Default.WriteLine($"Compiling {module.AssemblyName} with {string.Join(",", references.Select(r => r.Display))}");
 
       var options = new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary);
       var compilation = CSharpCompilation.Create(module.AssemblyName, trees, references, options);
