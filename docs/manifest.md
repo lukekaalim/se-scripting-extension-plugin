@@ -33,8 +33,7 @@ Compatability can contain the following as children:
 ## Workshop
 |Attributes|Requirement|Description|
 |-|-|-|
-|path|_Optional_|Define the path this module represents if imported as a workshop dependency|
-|workshopDefault|_Optional_|Does this module act as the root level workshop import, `"True"` or `"False"`|
+|path|Required|Define the path this module represents if imported as a workshop dependency|
 
 Multiple "Workshop" elements can be declared to satisfy multiple WorkshopDependencies with a single ScriptModule.
 
@@ -50,13 +49,12 @@ Multiple "Workshop" elements can be declared to satisfy multiple WorkshopDepende
 |Attributes|Requirement|Description|
 |-|-|-|
 |workshopId|Required|The ID declared in the mod.manifest.xml of the script module you wish to add as a dependency|
-|path|_Optional_|The path, relative to `Data/Scripts` in the mod's directory for which assembly we should load|
+|path|Required|The path, relative to `Data/Scripts` in the mod's directory for which assembly we should load|
 
 A Steam Workshop Dependency works a little differently than a ModuleDependency - a steam workshop dependency cannot have it's own subdependencies, but it can be depended upon if it has any public classes.
 
 This will use the assemblies generated from the default space engineers compiler - which means
-each subfolder (and the root) count as seperate projects. The path variable can be defined to only
-reference a specific folder, or it can be omitted to only import the root level.
+each subfolder (and the root) count as seperate projects. The path attribute identifies which subfolder to load assemblies from.
 
 You can define multiple SteamWorkshopDependency elements with the same workshopId and different paths.
 

@@ -27,7 +27,9 @@ in that directory, conforming to the following structure:
   <PluginDependency id="lkaalim/myplugin"/>
 
   <InGameScriptNamespace scope="lkaalim.mod.mymodname.ingame" />
-  <Compatability workshopDefault="True">
+  <Compatibility>
+    <Workshop path="mymodname">
+  </Compatibility>
 </Mod>
 ```
 

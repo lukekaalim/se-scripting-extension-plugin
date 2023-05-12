@@ -5,8 +5,9 @@
 Inside a script module, a slightly different compiler setup is used. This has
 some benefits such as:
 
-- **Folder support**. Code can now be placed inside folders without them being
-  considered seperate assemblies.
+- **Alternative Language Versions** **(WIP)**. Use more modern CSharp syntax
+  from language versions. (Not offically supported by the dotnet runtime, but
+  kinda works for some things.)
 
 ## Script Module API
 
@@ -120,21 +121,20 @@ from the default space engineers mod script compiler. Seperate directories in
 reference each other.
 
 To define a workshop dependency, a workshopId is requried which defines the
-workshop item's id for the downloaded mod. Optionally, a path can be provided,
-to specify which directory's assembly should be linked. A workshop depndency can
-be specified multiple times, referencing different directories of the same mod.
-
-If a path is not provided, the assembly linked to is the "root" assembly of all
-files directly descendant from "Scripts".
+workshop item's id for the downloaded mod, as well as a path to specify which
+directory's assembly should be linked. A workshop depndency can be specified
+dependency times, referencing different directories of the same mod.
 
 If a mod transitions from being a ordinary mod to using script modules, the
-[backwards compatability](#backwards-compatability) section references resolve against it.
+[backwards compatability](#backwards-compatability) section documents how
+references are resolved against it.
 
 ## Plugin Dependencies
 
 > WIP
 
-A mod can declare a dependency on a plugin - and potentially access APIs declared from it.
+A mod can declare a dependency on a plugin - and potentially access APIs
+declared from it.
 
 ## IngameScript Namespaces
 
