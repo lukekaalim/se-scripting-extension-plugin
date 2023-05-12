@@ -12,10 +12,9 @@ namespace ScriptingExtension.ScriptModules {
   {
     public List<MetadataReference> StaticReferences;
 
-    public ScriptModuleResult Compile(ScriptModule module, IEnumerable<CompiledScriptModule> dependencies) {
+    public ScriptModuleResult Compile(ScriptModule module, IEnumerable<MetadataReference> dependencies) {
       var trees = module.files.Select(file => file.Tree);
       var references = dependencies
-        .Select(dep => dep.reference)
         .Concat(StaticReferences);
 
       var options = new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary);

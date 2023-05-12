@@ -1,6 +1,8 @@
 using System.Reflection;
 using Microsoft.CodeAnalysis;
 
+using VRage.Game;
+
 namespace ScriptingExtension.ScriptModules {
   public class ScriptModuleResult {
     public ScriptModule module;
@@ -16,5 +18,13 @@ namespace ScriptingExtension.ScriptModules {
 
   public class ErrorUncompiledScriptModule : UncompiledScriptModule {
     public Diagnostic[] diagnostics;
+  }
+
+  public class CompiledWorkshopDependency {
+    public WorkshopId workshopId;
+    public string path;
+    
+    public MetadataReference reference;
+    public Assembly assembly;
   }
 }

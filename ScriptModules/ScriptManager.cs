@@ -44,11 +44,15 @@ namespace ScriptingExtension.ScriptModules
 
     public ScriptModule[] LoadMod(MyModContext context)
     {
-      var modulesRoot = Path.Combine(context.ModPath, "Data/ScriptModules");
-      return Directory.GetDirectories(modulesRoot)
-        .Select(moduleDirectory => LoadModule(context, moduleDirectory))
-        .OfType<ScriptModule>()
-        .ToArray();
+      try {
+        var modulesRoot = Path.Combine(context.ModPath, "Data/ScriptModules");
+        return Directory.GetDirectories(modulesRoot)
+          .Select(moduleDirectory => LoadModule(context, moduleDirectory))
+          .OfType<ScriptModule>()
+          .ToArray();
+      } catch (Exception) {
+        return new ScriptModule[] {};
+      }
     }
 
     public ScriptModule LoadModule(MyModContext context, string directory)

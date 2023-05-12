@@ -47,6 +47,8 @@ namespace ScriptingExtension
           }
         }
       };
+      Patches.ScriptCompilerPatches.Patch(harmony);
+      Patches.ScriptManagerPatches.Patch(harmony);
       MyLog.Default.WriteLine("Initialized Scripting Extension Plugin");
 
       MethodInfo target = typeof(MyScriptManager).GetMethod("LoadData", BindingFlags.Instance | BindingFlags.Public);
